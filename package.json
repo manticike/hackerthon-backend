@@ -1,0 +1,27 @@
+{
+  "name": "hackerthon-backend",
+  "version": "1.0.0",
+  "description": "Backend for an ecommerce website for hackerthon",
+  "homepage": "https://github.com/manticike/hackerthon-backend#readme",
+  "bugs": {
+    "url": "https://github.com/manticike/hackerthon-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manticike/hackerthon-backend.git"
+  },
+  "license": "ISC",
+  "author": "Group 2 underdoggs",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
