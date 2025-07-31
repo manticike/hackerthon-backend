@@ -1,11 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/connectDB.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 
 dotenv.config();
 connectDB();
 
 const app = express()
+
+app.use(express.json());
+app.use('/api/paystack', paymentRoutes);
 
 const PORT = process.env.PORT || 3000;
 
