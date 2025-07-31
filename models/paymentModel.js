@@ -17,7 +17,7 @@ const paymentSchema = new Schema({
         type: String,
         required: true,
     },
-    amout: {
+    amount: {
         type: Number,
         required: true,
     },
