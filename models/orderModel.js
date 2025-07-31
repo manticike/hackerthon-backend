@@ -25,7 +25,7 @@ const orderSchema = new Schema({
     } 
 },
  {
-        timestamp: true
+        timestamps: true
     })
 
     const Order = mongoose.model('Order', orderSchema);
