@@ -1,23 +1,35 @@
 import express from "express";
 import axios from "axios";
 
+import User from '../models/userModel.js';
+import { protect } from "../middlewares/authMiddleware.js";
+
 const router = express.Router();
 
-router.post('/initiate', async (req, res) => {
-    const { email, amount } = req.body;
+router.post('/initiate', protect, async (req, res) => {
+    const { amount } = req.body;
 
-    // Checking to see if the user inputed the right email and amount
-    if (!email || !amount) {
-        return res.status(400).json({ message: 'Email and amount are required' });
-    }
+    const userId = req.user.id;
 
     try {
-        const paystackData = {
+        const user = await User.findById(userId);
+         // Checking to see if the user exists
+    if (!user) {
+        return res.status(400).json({ message: 'User not found' });
+    }
+    if (!amount) {
+        return res.status(400).json({ message: 'Amount is required'});
+    }
+
+    const email = user.email;
+
+    // Paystack payload
+    const paystackData = {
             email,
             amount: amount * 100
-        }
+        };
 
-        const response = await axios.post(
+         const response = await axios.post(
            "https://api.paystack.co/transaction/initialize" ,
            paystackData,
            {
@@ -27,10 +39,11 @@ router.post('/initiate', async (req, res) => {
             }
            }
         );
-
         const { authorization_url } = response.data.data;
         res.status(200).json({ authorization_url });
-    } catch (error) {
+    }
+    
+    catch (error) {
         console.error('Paystack error:', error.response?.data || error.message);
         res.status(500).json({
             message: 'Payment initialization failed',
