@@ -13,6 +13,7 @@ connectDB();
 
 const app = express();
 
+app.use(cors());
 // Webhook route must come BEFORE express.json()
 app.post('/api/paystack/webhook', express.raw({ type: 'application/json' }), paystackWebhook);
 
