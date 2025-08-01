@@ -9,6 +9,6 @@ import {
 const router = express.Router();
 
 router.post('/initiate', protect, initiatePayment);
-router.get('/verify', protect, verifyPayment);
+router.get('/:verify', protect, verifyPayment);
 
 export default router;
