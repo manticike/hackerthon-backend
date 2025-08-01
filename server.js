@@ -6,7 +6,7 @@ import { paystackWebhook } from './controllers/paymentController.js';
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import productRoutes from './routes/productRoutes.js';
-
+import userRoutes from './routes/userRoutes.js';
 dotenv.config();
 connectDB();
 
@@ -19,9 +19,10 @@ app.post('/api/paystack/webhook', express.raw({ type: 'application/json' }), pay
 app.use(express.json());
 
 // Regular API routes
+app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
-app.use('/api/paystack', paymentRoutes);
+app.use('/api/payment', paymentRoutes);
 app.use('/api/orders', orderRoutes);
 
 // Optional health check
